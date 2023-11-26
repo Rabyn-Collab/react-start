@@ -7,7 +7,7 @@ const Header = () => {
       <h1 className='text-2xl'>Logo</h1>
       <nav className='space-x-5'>
         <NavLink to='/about-page' >About</NavLink>
-        <NavLink to='/'>Contact</NavLink>
+        <NavLink to='/not'>Contact</NavLink>
 
       </nav>
 
@@ -16,3 +16,6 @@ const Header = () => {
 }
 
 export default Header
+
+
+
