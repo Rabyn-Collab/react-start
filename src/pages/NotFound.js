@@ -1,6 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
+
 
 const NotFound = () => {
+
+  const nav = useNavigate();
+
+
+
+
   return (
     <div>
 
@@ -10,6 +18,8 @@ const NotFound = () => {
       <div className='text-center'>
         <h1>Oops Something went wrong</h1>
         <p>Page not Found</p>
+        <button onClick={() => nav(-1)}>Go To Back Page</button>
+
       </div>
 
 
