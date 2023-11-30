@@ -1,13 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const person = {
-  name: 'ram',
-  age: 90
-};
 
-
-const { name, age } = person;
 
 const Header = () => {
   return (
@@ -20,7 +14,7 @@ const Header = () => {
             return isActive === true ? 'text-pink-700' : 'text-white';
           }
         } to='/about-page' >About</NavLink>
-        <NavLink to='/not'>Contact</NavLink>
+        <NavLink to='/contact-page'>Contact</NavLink>
 
       </nav>
 

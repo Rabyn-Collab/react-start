@@ -1,31 +1,37 @@
 import React, { useState } from 'react'
-import Sample from './Sample';
-import { movie } from '../dummy/movie_data';
+import Contact from './Contact';
 
 const HomePage = () => {
+  const [data, setData] = useState([]);
 
-  const [count, setCount] = useState(0);
 
-
-  const addTo = () => {
-    setCount((prev) => prev + 1);
+  const addSome = (obj) => {
+    setData([...data, obj]);
   }
 
-  const minusTo = () => {
-    setCount((prev) => prev - 1);
+  const remove = (index) => {
+    data.splice(index, 1);
+    setData([...data]);
   }
-  const movieData = movie;
 
-  const m = {
-    ji: 90
-  };
+
   return (
-    <div className='p-5'>
+    <div>
+      <Contact addSome={addSome} />
 
-      <h1>{count}</h1>
+      {data.map((post, i) => {
+        return <div key={i} className='shadow-lg max-w-xs p-4 flex items-baseline justify-between'>
+          <div>
+            <h1 className='font-bold'>{post.title}</h1>
+            <p>{post.detail}</p>
+          </div>
+          <button onClick={() => remove(i)}>
+            <i className="fa-solid fa-trash"></i>
+          </button>
 
+        </div>
+      })}
 
-      <Sample some={900} add={addTo} />
     </div>
   )
 }
