@@ -1,36 +1,18 @@
-import React, { useState } from 'react'
-import Contact from './Contact';
+import React, { useEffect, useState } from 'react'
 
 const HomePage = () => {
-  const [data, setData] = useState([]);
+  const [n, setN] = useState(0);
 
+  useEffect(() => {
+    if (n === 0) {
 
-  const addSome = (obj) => {
-    setData([...data, obj]);
-  }
-
-  const remove = (index) => {
-    data.splice(index, 1);
-    setData([...data]);
-  }
-
-
+    } else {
+      console.log('asdl;k');
+    }
+  }, [n]);
   return (
     <div>
-      <Contact addSome={addSome} />
-
-      {data.map((post, i) => {
-        return <div key={i} className='shadow-lg max-w-xs p-4 flex items-baseline justify-between'>
-          <div>
-            <h1 className='font-bold'>{post.title}</h1>
-            <p>{post.detail}</p>
-          </div>
-          <button onClick={() => remove(i)}>
-            <i className="fa-solid fa-trash"></i>
-          </button>
-
-        </div>
-      })}
+      <button onClick={() => setN(n + 1)}>change to</button>
 
     </div>
   )
