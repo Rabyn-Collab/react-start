@@ -20,7 +20,7 @@ const Header = () => {
             return isActive === true ? 'text-pink-700' : 'text-white';
           }
         } to='/about-page' >About</NavLink>
-        <NavLink to='/not'>Contact</NavLink>
+        <NavLink to='/add-daily'>Add Daily</NavLink>
 
       </nav>
 

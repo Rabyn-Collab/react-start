@@ -70,7 +70,7 @@ const AddForm = () => {
       <Typography variant="h4" color="blue-gray">
         Add Your Daily Blogs
       </Typography>
-      y
+
       <form onSubmit={formik.handleSubmit} className="mt-6 mb-2 ">
         <div className="mb-1 flex flex-col gap-6">
 
