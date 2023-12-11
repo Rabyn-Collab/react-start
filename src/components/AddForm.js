@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import * as Yup from 'yup';
 import { addBlogs } from "../features/blogSlice";
+import { nanoid } from "@reduxjs/toolkit";
 
 
 const AddForm = () => {
@@ -56,7 +57,16 @@ const AddForm = () => {
       imageUrl: ''
     },
     onSubmit: (val) => {
-      dispatch(addBlogs(val));
+      const newData = {
+        title: val.title,
+        detail: val.detail,
+        place: val.place,
+        times: val.times,
+        country: val.country,
+        imageUrl: val.imageUrl,
+        id: nanoid()
+      };
+      dispatch(addBlogs(newData));
       nav(-1);
     },
     //validationSchema: valSchema
