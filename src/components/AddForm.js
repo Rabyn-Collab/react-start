@@ -10,10 +10,17 @@ import {
   Option,
 } from "@material-tailwind/react";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import * as Yup from 'yup';
+import { addBlogs } from "../features/blogSlice";
 
 
 const AddForm = () => {
+
+  const dispatch = useDispatch();
+  const nav = useNavigate();
+
   // const dat = ['ram', 'shyam'];
 
 
@@ -49,9 +56,10 @@ const AddForm = () => {
       imageUrl: ''
     },
     onSubmit: (val) => {
-      console.log(val);
+      dispatch(addBlogs(val));
+      nav(-1);
     },
-    validationSchema: valSchema
+    //validationSchema: valSchema
   });
 
   const radioData = [
@@ -151,7 +159,7 @@ const AddForm = () => {
             <Select
               onChange={(e) => formik.setFieldValue('country', e)}
               label="Select Country">
-              <Option value="nepalgmail.com">Nepal</Option>
+              <Option value="nepal">Nepal</Option>
               <Option value="india">India</Option>
               <Option value="china">China</Option>
 
@@ -181,7 +189,7 @@ const AddForm = () => {
             />
             {formik.errors.imageFile && formik.touched.imageFile && <h1 className="mt-2 text-pink-700">{formik.errors.imageFile}</h1>}
 
-            {formik.values.imageUrl && !formik.errors.imageFile && <div className="mt-5 ">
+            {formik.values.imageUrl && <div className="mt-5 ">
               <img className="h-[200px]" src={formik.values.imageUrl} alt="" />
             </div>}
 
@@ -191,7 +199,7 @@ const AddForm = () => {
         </div>
 
         <Button type="submit" className="mt-6" fullWidth>
-          sign up
+          submit
         </Button>
 
       </form>
