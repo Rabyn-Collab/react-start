@@ -6,12 +6,14 @@ import { getBlogs, setToLocal } from "./local";
 
 const blogSlice = createSlice({
   name: 'blogSlice',
-  initialState: getBlogs(),
+  initialState: {
+    blogs: getBlogs()
+  },
   reducers: {
 
     addBlogs: (state, action) => {
-      state = [...state, action.payload];
-      setToLocal(state);
+      state.blogs = [...state.blogs, action.payload];
+      setToLocal(state.blogs);
     }
 
 

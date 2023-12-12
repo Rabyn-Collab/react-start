@@ -29,7 +29,7 @@ const AddForm = () => {
 
   const valSchema = Yup.object({
     title: Yup.string().required(),
-    detail: Yup.string().required(),
+    detail: Yup.string().min(120).required(),
     place: Yup.string().required(),
     times: Yup.array().min(1).required(),
     country: Yup.string().required(),
@@ -69,7 +69,7 @@ const AddForm = () => {
       dispatch(addBlogs(newData));
       nav(-1);
     },
-    //validationSchema: valSchema
+    validationSchema: valSchema
   });
 
   const radioData = [

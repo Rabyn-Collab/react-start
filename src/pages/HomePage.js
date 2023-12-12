@@ -1,17 +1,15 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import CardUi from '../components/CardUi';
 
 
 const HomePage = () => {
-  const data = useSelector((state) => state.blog);
-  const dat = useSelector((state) => state);
-  console.log(dat);
-  console.log(data);
+  const { blogs } = useSelector((store) => store.blog);
 
   return (
-    <div>
-      {data && data.map((d,) => {
-        return <h1 key={d.id}>{d.title}</h1>
+    <div className='p-4 grid grid-cols-3 gap-5 items-start'>
+      {blogs && blogs.map((blog,) => {
+        return <CardUi key={blog.id} blog={blog} />
       })}
     </div>
   )
