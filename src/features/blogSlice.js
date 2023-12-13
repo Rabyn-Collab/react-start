@@ -14,6 +14,18 @@ const blogSlice = createSlice({
     addBlogs: (state, action) => {
       state.blogs = [...state.blogs, action.payload];
       setToLocal(state.blogs);
+    },
+
+    updateBlog: (state, action) => {
+      state.blogs = state.blogs.map((blog) => {
+        return blog.id === action.payload.id ? action.payload : blog
+      });
+      setToLocal(state.blogs);
+    },
+
+    removeBlog: (state, action) => {
+      state.blogs.splice(action.payload, 1);
+      setToLocal(state.blogs);
     }
 
 
@@ -21,5 +33,5 @@ const blogSlice = createSlice({
 
 });
 
-export const { addBlogs } = blogSlice.actions;
+export const { addBlogs, updateBlog, removeBlog } = blogSlice.actions;
 export default blogSlice.reducer;

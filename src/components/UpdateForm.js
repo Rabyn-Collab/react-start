@@ -10,22 +10,21 @@ import {
   Option,
 } from "@material-tailwind/react";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
 import * as Yup from 'yup';
-import { addBlogs } from "../features/blogSlice";
-import { nanoid } from "@reduxjs/toolkit";
+import { updateBlog } from "../features/blogSlice";
 
 
-const AddForm = () => {
+const UpdateForm = () => {
+  const { id } = useParams();
+  const { blogs } = useSelector((store) => store.blog);
+  const blog = blogs.find((bl) => bl.id === id);
 
   const dispatch = useDispatch();
   const nav = useNavigate();
 
-  // const dat = ['ram', 'shyam'];
 
-
-  // console.log(dat.includes('ram'));
 
   const valSchema = Yup.object({
     title: Yup.string().required(),
@@ -35,26 +34,26 @@ const AddForm = () => {
     country: Yup.string().required(),
     //  country: Yup.string().matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'please provide valid  email').required(),
 
-    imageFile: Yup.mixed()
+    // imageFile: Yup.mixed()
+    //   .test('fileType', 'Invalid file type', (value) => {
+    //     return value && ['image/jpeg', 'image/png', 'image/jpg'].includes(value.type);
+    //   })
+    //   .test('fileSize', 'File too large', (value) => {
 
-      .test('fileType', 'Invalid file type', (value) => {
-        return value && ['image/jpeg', 'image/png', 'image/jpg'].includes(value.type);
-      })
-
-      .test('fileSize', 'File too large', (value) =>
-        value && value.size <= 4 * 1024 * 1024
-      )
+    //     return value && value.size <= 4 * 1024 * 1024
+    //   }
+    //   )
 
   });
   const formik = useFormik({
     initialValues: {
-      title: '',
-      detail: '',
-      place: '',
-      times: [],
-      country: '',
-      imageFile: null,
-      imageUrl: ''
+      title: blog?.title,
+      detail: blog?.detail,
+      place: blog?.place,
+      times: blog?.times,
+      country: blog?.country,
+      imageFile: '',
+      imageUrl: blog?.imageUrl
     },
     onSubmit: (val) => {
       const newData = {
@@ -64,12 +63,12 @@ const AddForm = () => {
         times: val.times,
         country: val.country,
         imageUrl: val.imageUrl,
-        id: nanoid()
+        id: blog.id
       };
-      dispatch(addBlogs(newData));
+      dispatch(updateBlog(newData));
       nav(-1);
     },
-    //validationSchema: valSchema
+    validationSchema: valSchema
   });
 
   const radioData = [
@@ -125,6 +124,7 @@ const AddForm = () => {
               {radioData.map((rad, i) => {
                 return <Radio
                   value={rad.label}
+                  checked={formik.values.place === rad.label ? true : false}
                   onChange={formik.handleChange}
                   key={i}
                   name="place"
@@ -149,6 +149,7 @@ const AddForm = () => {
                   onChange={formik.handleChange}
                   key={i}
                   value={check.label}
+                  checked={formik.values.times.includes(check.label)}
                   name="times"
                   label={check.label}
                   color={check.color} />;
@@ -167,6 +168,7 @@ const AddForm = () => {
 
           <div className="w-72">
             <Select
+              value={formik.values.country}
               onChange={(e) => formik.setFieldValue('country', e)}
               label="Select Country">
               <Option value="nepal">Nepal</Option>
@@ -178,7 +180,7 @@ const AddForm = () => {
           </div>
 
           <div>
-            <Typography>Select Image</Typography>
+            <Typography>Change Image</Typography>
 
             <Input
               onChange={(e) => {
@@ -217,4 +219,4 @@ const AddForm = () => {
   )
 }
 
-export default AddForm
+export default UpdateForm

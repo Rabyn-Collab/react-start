@@ -8,8 +8,8 @@ const HomePage = () => {
 
   return (
     <div className='p-4 grid grid-cols-3 gap-5 items-start'>
-      {blogs && blogs.map((blog,) => {
-        return <CardUi key={blog.id} blog={blog} />
+      {blogs && blogs.map((blog, index) => {
+        return <CardUi key={blog.id} i={index} blog={blog} />
       })}
     </div>
   )
