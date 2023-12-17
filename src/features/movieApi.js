@@ -3,8 +3,6 @@ import { api_key, baseUrl } from './constants';
 
 
 
-
-
 export const movieApi = createApi({
   reducerPath: 'movieApi',
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
@@ -21,11 +19,8 @@ export const movieApi = createApi({
     }),
 
 
-
-
-
-
-
-
   })
 });
+
+
+export const { useGetMovieByCategoryQuery } = movieApi;
