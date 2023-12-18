@@ -5,15 +5,26 @@ import { api_key, baseUrl } from './constants';
 
 export const movieApi = createApi({
   reducerPath: 'movieApi',
-  baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: baseUrl, headers: {
+      Authorization: api_key
+    }
+  }),
   endpoints: (builder) => ({
 
 
     getMovieByCategory: builder.query({
       query: (query) => ({
         url: `/movie/${query}`,
-        headers: {
-          Authorization: api_key
+
+      })
+    }),
+
+    getSearchMovie: builder.query({
+      query: (query) => ({
+        url: '/search/movie',
+        params: {
+          query: query
         }
       })
     }),
@@ -23,4 +34,4 @@ export const movieApi = createApi({
 });
 
 
-export const { useGetMovieByCategoryQuery } = movieApi;
+export const { useGetMovieByCategoryQuery, useGetSearchMovieQuery } = movieApi;
