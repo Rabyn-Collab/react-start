@@ -2,11 +2,15 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { api_key, baseUrl } from './constants';
 
 
+const m = () => {
+  return {};
+}
 
 export const movieApi = createApi({
   reducerPath: 'movieApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: baseUrl, headers: {
+    baseUrl: baseUrl,
+    headers: {
       Authorization: api_key
     }
   }),
@@ -30,8 +34,26 @@ export const movieApi = createApi({
     }),
 
 
+    getMovieDetail: builder.query({
+      query: (query) => ({
+        url: `/movie/${query}`,
+      })
+    }),
+
+    getMovieVideo: builder.query({
+      query: (query) => ({
+        url: `/movie/${query}/videos`,
+      })
+    }),
+
+
   })
 });
 
 
-export const { useGetMovieByCategoryQuery, useGetSearchMovieQuery } = movieApi;
+export const {
+  useGetMovieByCategoryQuery,
+  useGetMovieDetailQuery,
+  useGetSearchMovieQuery,
+  useGetMovieVideoQuery
+} = movieApi;

@@ -15,8 +15,9 @@ const Header = () => {
     initialValues: {
       search: ''
     },
-    onSubmit: (val) => {
+    onSubmit: (val, { resetForm }) => {
       nav(`/movieSearch/${val.search}`);
+      resetForm();
     }
   });
 
