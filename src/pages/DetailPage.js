@@ -7,11 +7,13 @@ const DetailPage = () => {
   const { id } = useParams();
 
   const { isError, isLoading, error, data } = useGetMovieDetailQuery(id);
-  console.log(data);
-  return (
-    <div>
 
+  return (
+    <div className='p-5 space-y-5'>
+      <h1>{data?.title}</h1>
       <VideoUi id={id} />
+      <p>{data?.overview}</p>
+
 
 
     </div>
