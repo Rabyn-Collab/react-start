@@ -19,8 +19,10 @@ export const movieApi = createApi({
 
     getMovieByCategory: builder.query({
       query: (query) => ({
-        url: `/movie/${query}`,
-
+        url: `/movie/${query.category}`,
+        params: {
+          page: query.page
+        }
       })
     }),
 
